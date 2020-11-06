@@ -44,21 +44,17 @@ class clock:
         self.display.text(str(self.m) if len(str(self.m))==2 else '0'+str(self.m) ,17,1,1)
         self.se=0 if self.se==1 else 1
         self.display.show()
-    def fans(self):
-        gc.collect()    
-        url="https://m.acfun.cn/upPage/"+str(self.id)
-        headers = {'User-Agent':'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Mobile Safari/537.36' }
-        re=urequests.get(url,headers=headers)
-        ca=re.text
-        if "up-page-head" in ca:
-            cc=ure.search(r">\d+<(.*?)>(\d+)<",ca)
-            del ca
-            del re
-            self.fan=cc.group(2)
-        else:
-            del ca
-            del re
-            self.fan='0'
+        def fans(self):
+            gc.collect()    
+            url="https://www.acfun.cn/rest/pc-direct/user/userInfo?userId="+str(self.id)
+            headers = {'User-Agent':'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Mobile Safari/537.36' }
+            re=urequests.get(url,headers=headers)
+            ca=re.text
+            cc=ujson.loads(ca)
+            if cc['result']==0:
+                self.fan=cc['profile']['followed']
+            else:
+                self.fan='0';
     def show_myfans(self):
         for j in range(4):
             self.display.fill(0)
