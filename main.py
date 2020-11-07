@@ -3,7 +3,7 @@ import ntptime
 import network
 import max7219
 import urequests
-import gc,ure
+import gc,ure,ujson
 from machine import Pin,SPI,RTC
 class clock:
     def __init__(self):
