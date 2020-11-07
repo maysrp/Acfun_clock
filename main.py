@@ -8,8 +8,8 @@ from machine import Pin,SPI,RTC
 class clock:
     def __init__(self):
         self.id="701353" #你的ACFUN的ID,目前只能在10000粉丝以下时候才能正常显示
-        self.wifi="pangxh" #你的WiFi名，只支持2.4GHZ的wifi
-        self.password="a12345678" #你的WiFi密码
+        self.wifi="abc" #你的WiFi名，只支持2.4GHZ的wifi
+        self.password="12345678" #你的WiFi密码
         self.ntp()
         self.dp()
         self.se=0
@@ -52,15 +52,15 @@ class clock:
         ca=re.text
         cc=ujson.loads(ca)
         if cc['result']==0:
-            self.fan=cc['profile']['followed']
+            self.fan=cc['profile']['followed'].replace('\u4e07','W')
         else:
             self.fan='0'
     def show_myfans(self):
-        for j in range(4):
+        for j in range(len(self.fan)):
             self.display.fill(0)
             for i in self.acfun:
                 self.display.pixel(i[0]-8*j,i[1],1)
-            self.display.text(str(self.fan),25-8*j,1,1)
+            self.display.text(self.fan,25-8*j,1,1)
             self.display.show()
             time.sleep(0.5)
 
