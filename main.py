@@ -54,7 +54,7 @@ class clock:
         if cc['result']==0:
             self.fan=cc['profile']['followed']
         else:
-            self.fan='0';
+            self.fan='0'
     def show_myfans(self):
         for j in range(4):
             self.display.fill(0)
