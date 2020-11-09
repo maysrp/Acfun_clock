@@ -22,4 +22,4 @@ max7219.py这个库文件也上传到你的esp32上
 你的acfun的时钟就完成了
 
 ## 存在的问腿
-因为ACFUN没有固定的API,micropython不支持utf8的中文所以在无法显示粉丝大于10000的acer。
+-因为ACFUN没有固定的API,micropython不支持utf8的中文所以在无法显示粉丝大于10000的acer。-
